@@ -33,26 +33,7 @@
 \end{itemize}
 
 \subsection*{Predicting Bitcoin Price based on Sentiment Analysis on News and Social Media}
-\par \qquad In recent years, Bitcoin has gained enormous popularity. After receiving many media coverages in 2017, the price went up drastically from USD 1,000 to USD 20,000, from which it has since gone down. In fact, this sudden increase in price is not surprising, since behavioral economics states that there are correlations between the public sentiment and the financial market. Fortunately, with the advent of social media, the information about public feelings has become abundant, where Twitter has received a lot of attention from researchers. The aim of this project is thus to test the hypothesis that, in addition to past historical prices, the public sentiment also influences the stock market. We will focus particularly on the case of the Bitcoin prices. The plan of the project is as follows. Tweets will be pre-processed and represented using word2vec model rather than N-gram model, as word2vec allows for sustainability in word meaning across different contexts. We will then gather public sentiment from these tweets. We will train different classifiers and choose the best sentiment analysis model to apply to tweets that are related to Bitcoin or cryptocurrencies. Once sentiment analysis on Bitcoin tweets has been assessed, we are then going to extract its past historical price movements. The idea is that the future movement of a stock price should mainly be able to reflect its past tendencies, but that the public opinion will also influence its future paths. Therefore, we will then train a final machine learning model that will classify the Bitcoin price movement as being ``up'' or ``down'' at a certain time based on both its past historical movements and on its public opinion at that time, which we would have obtained based on the sentiment analysis as described above.
+\par \qquad In recent years, Bitcoin has gained enormous popularity. After receiving many media coverages in 2017, the price went up drastically from USD 1,000 to USD 20,000, from which it has since gone down. In fact, this sudden increase in price is not surprising, since behavioral economics states that there are correlations between the public sentiment and the financial market. Fortunately, with the advent of social media, the information about public feelings has become abundant, where Twitter has received a lot of attention from researchers. The aim of this project is thus to test the hypothesis that, in addition to past historical prices, the public sentiment also influences the stock market. We will focus particularly on the case of the Bitcoin prices. The plan of the project is as follows. Tweets will be pre-processed and represented using word2vec model rather than N-gram model, as word2vec allows for sustainability in word meaning across different contexts. We will then gather public sentiment from these tweets. We will train different classifiers and choose the best sentiment analysis model to apply to tweets that are related to Bitcoin or cryptocurrencies. Once sentiment analysis on Bitcoin tweets has been assessed, we are then going to extract its past historical price movements. The idea is that the future movement of a stock price should mainly be able to reflect its past tendencies, but that the public opinion will also influence its future paths. Therefore, we will then train a final machine learning model that will classify the Bitcoin price movement as being ``up'' or ``down'' at a certain time based on both its past historical movements and on its public opinion at that time, which we would have obtained based on the sentiment analysis as described above. It is also of interesting to note that Twitter tweets and public sentiment at a certain time does not necessarily have an immediate impact on the price of Bitcoin, so that it would be interesting to test on the multiple possible time of impact  given a tweet. For example, a tweet posted on day 1 might only impact on the price on day 2. 
 \\
-\subsection*{Public Sentiment}
-\begin{itemize}
-	\item word2vec representation for tweets
-	\item to determine the sentiment of a tweet, list out positive and negative keywords and see if the tweet contains those keywords.
-	\item LDA for finding topics in news articles
-	\item If the main topic of a news article is cryptocurrency/Bitcoin, include it into our corpus
-	\item for each news artcle, determine the sentiment by using the positive and negative keywords approach
-\end{itemize}
-
-\subsection*{Predicting Bitcoin Price Movement}
-
-\begin{enumerate}
-	\item Choose a time frame (minutes, hours, days, etc)
-	\item For each time frame, determine the public sentiment.
-	\item To do this, take all the tweets and articles within that time frame, and the public sentiment will be the majority of sentiments.
-	\item See if the Bitcoin price increased or decreased within that time frame
-	\item Use (time, sentiment, price movement) as input for different models (SVM, neural networks, etc) to predict the rise and fall of the price.
-	\item Compare outcomes of the different models
-\end{enumerate}
 
 \end{document}
