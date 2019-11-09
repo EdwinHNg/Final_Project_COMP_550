@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28a4eb1d-0d62-4030-a812-a568af6f3786" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Bitcoin_Prediction_Twitter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proposal/Proposal.log" beforeDir="false" afterPath="$PROJECT_DIR$/Proposal/Proposal.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proposal/Proposal.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Proposal/Proposal.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Proposal/Proposal.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/Proposal/Proposal.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bitcoin_Prediction_Twitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bitcoin_Prediction_Twitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datasets/BTC_USD_2013-10-01_2019-11-05-CoinDesk.csv" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,10 +17,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Bitcoin_Prediction_Twitter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="39" selection-start-line="39" selection-end-line="39" selection-end-column="22" />
+            <state relative-caret-position="205">
+              <caret line="81" selection-start-line="81" selection-end-line="82" selection-end-column="52" />
               <folding>
-                <element signature="e#186#205#0" expanded="true" />
+                <element signature="e#38#121#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,8 +55,8 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="21" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="230" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
@@ -67,6 +66,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -78,10 +78,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -110,7 +110,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="21" y="23" width="1440" height="877" extended-state="1" />
+    <frame x="230" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24947146" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -132,12 +133,19 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/keras/engine/training_arrays.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Bitcoin_Prediction_Twitter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="39" selection-start-line="39" selection-end-line="39" selection-end-column="22" />
+        <state relative-caret-position="205">
+          <caret line="81" selection-start-line="81" selection-end-line="82" selection-end-column="52" />
           <folding>
-            <element signature="e#186#205#0" expanded="true" />
+            <element signature="e#38#121#0" expanded="true" />
           </folding>
         </state>
       </provider>
