@@ -14,6 +14,11 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, roc_curve,  roc_auc_score, classification_report
 
+# Importing the built-in logging module
+import logging
+
+
+logging.basicConfig(format='%(asctime)s : %(levelname) s : %(message)s', level=logging.INFO)
 
 # --------------------------------------------------------- #
 ############### EXTRACTING BITCOIN TWEET DATA ###############
@@ -36,7 +41,10 @@ np.random.seed(24)
 
 #read CSV file containing tweets and labels, using Pandas , to get a dataframe
 tweetsData = pd.read_csv('datasets/Sentiment Analysis Dataset.csv', skiprows=[8835, 535881]) #skiping these two rows as they have some bad data
-tweetsData.head()
+# ------------------------------------------------- #
+# Run on some data as to not to overflow the memory #
+tweetsData = tweetsData.iloc[0:43000,]
+# ------------------------------------------------- #
 
 #Dividing the dataset into features and lables
 tweets = tweetsData['SentimentText']
@@ -54,35 +62,37 @@ for i, line in enumerate(tweets):
     tweets_split.append(tweet)
 
 
-#Use pretrained Word2Vec model from google but trim the word list to 50,0000 compared to 300,000 in the original
-#Google pretrained model
-
-
-w2vModel = word2vec.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True, limit=50000)
-
 # vectorize a text corpus : Converting Words to integers
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts(tweets_split)
-X = tokenizer.texts_to_sequences(tweets_split)
+Tokenized_Tweet = tokenizer.texts_to_sequences(tweets_split)
 
-# lenght of tweet to consider
+# lenght of tweet to consider => Uniformize each tweets length to pass into LSTM
 maxlentweet = 10
-# Reduce each tweet to that length
-X = pad_sequences(X, maxlen=maxlentweet)
+Tokenized_Tweet = pad_sequences(Tokenized_Tweet, maxlen=maxlentweet)
+
+
+# --- split dataset --- #
+X_train, X_test, Y_train, Y_test = train_test_split(Tokenized_Tweet, labels, test_size= 0.1, random_state = 24)
 
 # -------------------------- #
 # TO PUT ALSO BITCOIN TWEETS #
 # -------------------------- #
-
-
+# Y_train[58192] gives error
+# Y_train[53328]
 # --------------------------------------------------------------------------------------------- #
 # ----------------------------------------- EMBEDDING ----------------------------------------- #
 # --------------------------------------------------------------------------------------------- #
 # Word Embedding is a representation of text where words that have the same meaning have a similar representation.
 
+# Google News dataset model, containing 300-dimensional embeddings for 3 millions words and phrases
+#Use pretrained Word2Vec model from google but trim the word list to 50,0000 compared to 300,000 in the original
+#Google pretrained model
+w2vModel = word2vec.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negative300.bin', binary=True, limit=50000)
+
 #create a embedding layer using Google pre triained word2vec (50000 words)
-embedding_layer = Embedding(input_dim=w2vModel.syn0.shape[0], output_dim=w2vModel.syn0.shape[1],  weights=[w2vModel.syn0],
-                            input_length=X.shape[1])
+embedding_layer = Embedding(input_dim=w2vModel.syn0.shape[0], output_dim=w2vModel.syn0.shape[1], weights=[w2vModel.syn0],
+                            input_length=Tokenized_Tweet.shape[1])
 
 
 # --------------------------------------------------------------------------------------------- #
@@ -104,14 +114,12 @@ model.add(Dense(1, activation='sigmoid'))
 
 # Try using different optimizers and different optimizer configs
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-print(model.summary())
+# print(model.summary())
 
 
+# ---- fit model --- #
 
-# --- split dataset --- #
-X_train, X_test, Y_train, Y_test = train_test_split(X, labels, test_size= 0.1, random_state = 24)
-
-#fit model
+# dataloaders
 batch_size = 32
-model.fit(X_train, Y_train, epochs=1, verbose=1, batch_size=batch_size)
 
+model.fit(X_train, Y_train, epochs=2, verbose=1, batch_size=batch_size)
