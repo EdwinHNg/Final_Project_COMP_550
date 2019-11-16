@@ -65,6 +65,7 @@ BitcoinTweets = df_BitcoinTweets['text']
 #and use regular expression to keep only letters we will use nltk Regular expression package
 tkr = RegexpTokenizer('[a-zA-Z@]+')
 maxlentweet = 15
+
 def Pre_Processer(Tweet_Corpus, maxlentweet):
      tweets_split = []
 
@@ -167,4 +168,4 @@ plt.legend(loc="lower right")
 plt.show()
 
 # ----------------------------------------------------------------------------------------------------------------- #
-
+LabelBitcoinTweet = model.predict(Bitcoin_Embed[0:8])
