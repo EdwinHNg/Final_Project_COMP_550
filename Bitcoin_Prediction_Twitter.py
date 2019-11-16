@@ -39,6 +39,10 @@ logging.basicConfig(format='%(asctime)s : %(levelname) s : %(message)s', level=l
 #Set random seed
 np.random.seed(24)
 
+# ----------------------------------------------------------- #
+# -------------------- EXTRACTING DATA ---------------------- #
+# ----------------------------------------------------------- #
+
 #read CSV file containing tweets and labels, using Pandas , to get a dataframe
 tweetsData = pd.read_csv('datasets/Sentiment Analysis Dataset.csv', skiprows=[8835, 535881]) #skiping these two rows as they have some bad data
 # ------------------------------------------------- #
@@ -51,36 +55,45 @@ tweetsData = tweetsData.iloc[0:43500,]
 tweets = tweetsData['SentimentText']
 labels = tweetsData['Sentiment']
 
+df_BitcoinTweets =  pd.read_csv('datasets/Bitcoins/BitcoinTweets.csv')
+BitcoinTweets = df_BitcoinTweets['text']
+# ----------------------------------------------------------- #
+# ----------------------------------------------------------- #
+# ----------------------------------------------------------- #
+# --- PREPROCESSING --- #
 #Lower and split the dialog
 #and use regular expression to keep only letters we will use nltk Regular expression package
 tkr = RegexpTokenizer('[a-zA-Z@]+')
+maxlentweet = 15
+def Pre_Processer(Tweet_Corpus, maxlentweet):
+     tweets_split = []
 
-tweets_split = []
+     for i, line in enumerate(Tweet_Corpus):
+         tweet = str(line).lower().split()
+         tweet = tkr.tokenize(str(tweet))
+         tweets_split.append(tweet)
 
-for i, line in enumerate(tweets):
-    tweet = str(line).lower().split()
-    tweet = tkr.tokenize(str(tweet))
-    tweets_split.append(tweet)
+     # vectorize a text corpus : Converting Words to integers
+     tokenizer = Tokenizer()
+     tokenizer.fit_on_texts(tweets_split)
+     Tokenized_Tweet = tokenizer.texts_to_sequences(tweets_split)
+
+     # lenght of tweet to consider => Uniformize each tweets length to pass into LSTM
+     Tokenized_Tweet = pad_sequences(Tokenized_Tweet, maxlen=maxlentweet)
+
+     return Tokenized_Tweet
+
+# ---------------------- #
+# Preprocess Corpus #
+Corpus_Embed = Pre_Processer(tweets, maxlentweet)
+
+# Preprocess Bitcoin Tweet #
+Bitcoin_Embed = Pre_Processer(BitcoinTweets, maxlentweet)
+
+# --- split dataset CORPUS --- #
+X_train, X_test, Y_train, Y_test = train_test_split(Corpus_Embed, labels, test_size= 0.1, random_state = 24)
 
 
-# vectorize a text corpus : Converting Words to integers
-tokenizer = Tokenizer()
-tokenizer.fit_on_texts(tweets_split)
-Tokenized_Tweet = tokenizer.texts_to_sequences(tweets_split)
-
-# lenght of tweet to consider => Uniformize each tweets length to pass into LSTM
-maxlentweet = 10
-Tokenized_Tweet = pad_sequences(Tokenized_Tweet, maxlen=maxlentweet)
-
-
-# --- split dataset --- #
-X_train, X_test, Y_train, Y_test = train_test_split(Tokenized_Tweet, labels, test_size= 0.1, random_state = 24)
-
-# -------------------------- #
-# TO PUT ALSO BITCOIN TWEETS #
-# -------------------------- #
-# Y_train[58192] gives error
-# Y_train[53328]
 # --------------------------------------------------------------------------------------------- #
 # ----------------------------------------- EMBEDDING ----------------------------------------- #
 # --------------------------------------------------------------------------------------------- #
@@ -93,7 +106,7 @@ w2vModel = word2vec.KeyedVectors.load_word2vec_format('GoogleNews-vectors-negati
 
 #create a embedding layer using Google pre triained word2vec (50000 words)
 embedding_layer = Embedding(input_dim=w2vModel.syn0.shape[0], output_dim=w2vModel.syn0.shape[1], weights=[w2vModel.syn0],
-                            input_length=Tokenized_Tweet.shape[1])
+                            input_length=Corpus_Embed.shape[1])
 
 
 # --------------------------------------------------------------------------------------------- #
