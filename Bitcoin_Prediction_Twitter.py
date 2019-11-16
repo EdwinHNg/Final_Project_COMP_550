@@ -43,7 +43,8 @@ np.random.seed(24)
 tweetsData = pd.read_csv('datasets/Sentiment Analysis Dataset.csv', skiprows=[8835, 535881]) #skiping these two rows as they have some bad data
 # ------------------------------------------------- #
 # Run on some data as to not to overflow the memory #
-tweetsData = tweetsData.iloc[0:43000,]
+tweetsData = tweetsData.iloc[0:43500,]
+
 # ------------------------------------------------- #
 
 #Dividing the dataset into features and lables
@@ -102,14 +103,18 @@ embedding_layer = Embedding(input_dim=w2vModel.syn0.shape[0], output_dim=w2vMode
 # The compressed representation effectively captures all the information in the sequence of words in the text
 
 
-# --- Building the modle --- #
+# --- Building the model --- #
 lstm_out = 80
 
 model = Sequential()
-# Add Embedding
+# Add Embedding (INPUTS)
 model.add(embedding_layer)
+# HIDDEN LAYER 1
+model.add(LSTM(units=lstm_out, dropout=0.2, recurrent_dropout=0.2, return_sequences=True,
+               input_shape=(w2vModel.syn0.shape[0],maxlentweet)))
+# HIDDENT LAYER 2
 model.add(LSTM(units=lstm_out, dropout=0.2, recurrent_dropout=0.2))
-# adding softmax for classification
+# adding softmax for classification: OUTPUT
 model.add(Dense(1, activation='sigmoid'))
 
 # Try using different optimizers and different optimizer configs
@@ -123,3 +128,39 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 batch_size = 32
 
 model.fit(X_train, Y_train, epochs=2, verbose=1, batch_size=batch_size)
+
+
+# ----------------------------------------- ROC CURVE OF SENTIMENT --------------------------------------------- #
+#analyze the results
+score, acc = model.evaluate(X_test, Y_test, verbose = 2, batch_size=batch_size)
+y_pred = model.predict(X_test)
+
+#ROC AUC curve
+rocAuc = roc_auc_score(Y_test, y_pred)
+
+falsePositiveRate, truePositiveRate, _ = roc_curve(Y_test, y_pred)
+
+plt.figure()
+
+plt.plot(falsePositiveRate, truePositiveRate, color='green',
+         lw=3, label='ROC curve (area = %0.2f)' % rocAuc)
+plt.plot([0, 1], [0, 1], color='navy', lw=3, linestyle='--')
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('Receiver Operating Characteristic of Sentiiment Analysis Model')
+plt.legend(loc="lower right")
+plt.show()
+
+# ----------------------------------------------------------------------------------------------------------------- #
+
+#Other accuracy metrices
+y_pred = (y_pred > 0.5)
+
+#confusion metrix
+cm = confusion_matrix(Y_test, y_pred)
+print(cm)
+
+#F1 Score, Recall and Precision
+print(classification_report(Y_test, y_pred, target_names=['Positive', 'Negative']))
