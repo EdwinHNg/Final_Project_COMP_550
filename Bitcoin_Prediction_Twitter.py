@@ -143,7 +143,7 @@ batch_size = 32
 model.fit(X_train, Y_train, epochs=2, verbose=1, batch_size=batch_size)
 
 
-# ----------------------------------------- ROC CURVE OF SENTIMENT --------------------------------------------- #
+# ------------------------------- ROC CURVE OF SENTIMENT TO CHECK FOR PERFORMANCE---------------------------------- #
 #analyze the results
 score, acc = model.evaluate(X_test, Y_test, verbose = 2, batch_size=batch_size)
 y_pred = model.predict(X_test)
@@ -168,12 +168,3 @@ plt.show()
 
 # ----------------------------------------------------------------------------------------------------------------- #
 
-#Other accuracy metrices
-y_pred = (y_pred > 0.5)
-
-#confusion metrix
-cm = confusion_matrix(Y_test, y_pred)
-print(cm)
-
-#F1 Score, Recall and Precision
-print(classification_report(Y_test, y_pred, target_names=['Positive', 'Negative']))
