@@ -20,6 +20,10 @@ import logging
 
 logging.basicConfig(format='%(asctime)s : %(levelname) s : %(message)s', level=logging.INFO)
 
+# ----------------------------------------------------------------------------------------------------------------- #
+# ------------------------------------------ SENTIMENT ANALYSIS  -------------------------------------------------- #
+# ----------------------------------------------------------------------------------------------------------------- #
+
 # --------------------------------------------------------- #
 ############### EXTRACTING BITCOIN TWEET DATA ###############
 # --------------------------------------------------------- #
@@ -56,7 +60,14 @@ tweets = tweetsData['SentimentText']
 labels = tweetsData['Sentiment']
 
 df_BitcoinTweets =  pd.read_csv('datasets/Bitcoins/BitcoinTweets.csv')
+# Ordering by dates #
+df_BitcoinTweets = df_BitcoinTweets.sort_values(by='timestamp')
+
 BitcoinTweets = df_BitcoinTweets['text']
+
+# Prevenging overflow #
+BitcoinTweets1 = BitcoinTweets.iloc[0:30000,]
+BitcoinTweets2 = BitcoinTweets.iloc[30001: 60000,]
 # ----------------------------------------------------------- #
 # ----------------------------------------------------------- #
 # ----------------------------------------------------------- #
@@ -91,6 +102,8 @@ Corpus_Embed = Pre_Processer(tweets, maxlentweet)
 # Preprocess Bitcoin Tweet #
 Bitcoin_Embed = Pre_Processer(BitcoinTweets, maxlentweet)
 
+Bitcoin_Embed1 = Pre_Processer(BitcoinTweets1, maxlentweet)
+Bitcoin_Embed2 = Pre_Processer(BitcoinTweets2, maxlentweet)
 # --- split dataset CORPUS --- #
 X_train, X_test, Y_train, Y_test = train_test_split(Corpus_Embed, labels, test_size= 0.1, random_state = 24)
 
@@ -118,7 +131,7 @@ embedding_layer = Embedding(input_dim=w2vModel.syn0.shape[0], output_dim=w2vMode
 
 
 # --- Building the model --- #
-lstm_out = 80
+lstm_out = 150
 
 model = Sequential()
 # Add Embedding (INPUTS)
@@ -168,4 +181,18 @@ plt.legend(loc="lower right")
 plt.show()
 
 # ----------------------------------------------------------------------------------------------------------------- #
-LabelBitcoinTweet = model.predict(Bitcoin_Embed[0:8])
+LabelBitcoinTweet1 = model.predict(Bitcoin_Embed1)
+LabelBitcoinTweet2 = model.predict(Bitcoin_Embed2)
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------- #
+# ------------------------------------------ BITCOIN HISTORICAL PRICE --------------------------------------------- #
+# ----------------------------------------------------------------------------------------------------------------- #
+
+# ----------------------------------------------------------- #
+# -------------------- Historical price --------------------- #
+# ----------------------------------------------------------- #
+
+BitcoinPrice = pd.read_csv('datasets/Bitcoins/BTC_USD_2013-10-01_2019-11-05-CoinDesk.csv')
