@@ -157,11 +157,32 @@ batch_size = 32
 model.fit(X_train, Y_train, epochs=2, verbose=1, batch_size=batch_size)
 
 
-# ------------------------------- ROC CURVE OF SENTIMENT TO CHECK FOR PERFORMANCE---------------------------------- #
+# ------------------------------------------------ PREDICTING ----------------------------------------------------- #
 #analyze the results
 score, acc = model.evaluate(X_test, Y_test, verbose = 2, batch_size=batch_size)
 y_pred = model.predict(X_test)
 
+
+# --- Looking for the decision boundaries to classify --- #
+from sklearn.metrics import accuracy_score
+
+decision_boundaries = np.arange(start = 0, stop = 1, step = 0.01)
+
+accuracy_Sentiment = []
+for decision in decision_boundaries:
+    scores = np.where(y_pred > decision, 1, 0)
+    accuracy = accuracy_score(scores, Y_test)*100
+    accuracy_Sentiment.append(accuracy)
+
+Accuracy_Sentiment_Twitter = max(accuracy_Sentiment)
+
+# Retrieving the predicted classification #
+index_best = accuracy_Sentiment.index(Accuracy_Sentiment_Twitter)
+Optimal_Prob = decision_boundaries[index_best]
+
+
+
+# ------------------------------- ROC CURVE OF SENTIMENT TO CHECK FOR PERFORMANCE---------------------------------- #
 #ROC AUC curve
 rocAuc = roc_auc_score(Y_test, y_pred)
 
@@ -195,4 +216,78 @@ LabelBitcoinTweet2 = model.predict(Bitcoin_Embed2)
 # -------------------- Historical price --------------------- #
 # ----------------------------------------------------------- #
 
-BitcoinPrice = pd.read_csv('datasets/Bitcoins/BTC_USD_2013-10-01_2019-11-05-CoinDesk.csv')
+df_BitcoinPrice = pd.read_csv('datasets/Bitcoins/BTC_USD_2013-10-01_2019-11-05-CoinDesk.csv')
+
+# ---------------------------------------------- #
+# Extracting just the date for future reference #
+import re
+
+BitcoinDate = []
+for Date in range(len(df_BitcoinPrice[['Date']])):
+    BitcoinDate.append(re.findall('\d{4}-\d{2}-\d{2}', str(df_BitcoinPrice[['Date']].iloc[Date,]))[0])
+# ---------------------------------------------- #
+
+# Join Only the formatted date YYYY-MM-DD #
+df_BitcoinPrice = df_BitcoinPrice.join(pd.DataFrame({'Formatted Date': BitcoinDate}))
+
+
+
+# plt.plot(df_BitcoinPrice['Formatted Date'], df_BitcoinPrice['Closing Price (USD)'], label='Bitcoin Price')
+# plt.show()
+
+# ----------------------------------------------------------- #
+# ------------------- DATA PREPROCESSING -------------------- #
+# ----------------------------------------------------------- #
+
+BitcoinPrice = df_BitcoinPrice.iloc[:, [2]].values
+
+
+#  scale our data for optimal performance => Normalizing the data
+from sklearn.preprocessing import MinMaxScaler
+sc = MinMaxScaler(feature_range = (0, 1))
+Bitcoin_Training_Data_Scaled = sc.fit_transform(BitcoinPrice)
+
+
+plt.plot(Bitcoin_Training_Data_Scaled)
+plt.show()
+
+# ------------------------------------------------------------------------------------ #
+# ---------- Defining the processing data: how many days taken into account ---------- #
+# opening stock price of the data based on the opening stock prices for the past 60 days #
+# ------------------------------------------------------------------------------------ #
+
+def processData(data,lb):
+    X,Y = [],[]
+    for i in range(len(data)-lb-1):
+        X.append(data[i:(i+lb),0])
+        Y.append(data[(i+lb),0])
+    return np.array(X),np.array(Y)
+
+LookBack = 60
+
+X,y = processData(Bitcoin_Training_Data_Scaled,LookBack)
+X_train,X_test = X[:int(X.shape[0]*0.80)],X[int(X.shape[0]*0.80):]
+y_train,y_test = y[:int(y.shape[0]*0.80)],y[int(y.shape[0]*0.80):]
+
+# -------------------- #
+# Build the LSTM model #
+# -------------------- #
+regressor = Sequential()
+regressor.add(LSTM(256,input_shape=(LookBack,1)))
+# Drop out layers to avoid overfitting #
+regressor.add(Dropout(0.2))
+regressor.add(Dense(1))
+regressor.compile(optimizer='adam',loss='mse')
+
+#Reshape data for (Sample,Timestep,Features)
+X_train = X_train.reshape((X_train.shape[0],X_train.shape[1],1))
+X_test = X_test.reshape((X_test.shape[0],X_test.shape[1],1))
+
+#Fit model with history to check for overfitting
+history = regressor.fit(X_train,y_train,epochs=300,validation_data=(X_test,y_test),shuffle=False)
+
+
+# Predicting Test #
+Xt = regressor.predict(X_test)
+plt.plot(sc.inverse_transform(y_test.reshape(-1,1)))
+plt.plot(sc.inverse_transform(Xt))
