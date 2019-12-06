@@ -49,7 +49,7 @@ ID: 260732345}
 \end{abstract}
 \begin{IEEEkeywords}
 \begin{center}
-\textbf{Bitcoin, LSTM, Sentiment Analysis}
+\textbf{Bitcoin, LSTM, Sentiment Analysis, word2vec}
 \end{center}
 \end{IEEEkeywords}
     \end{minipage}
@@ -57,18 +57,33 @@ ID: 260732345}
   \end{@twocolumnfalse}
 ]
 
-
 \section{Introduction}
-	Predicting whether or not an individual attains a fixed level of income is of great practical significance, particularly in the pension plan sector in view of actuarial valuations.\\
-	The primary contributions of this paper is to classify income levels using tree-based methods as follows: conditional inference tree and random forest. In order to compare their predictive power, we also perform classification based on simpler model, the logistic regression.  \\ 
-	We proceed as follows. First, a short description of the dataset is performed. Section 3 lays out the methodology of our paper. Section 4 presents our results and the analysis of our different models. Finally we conclude in Section 5.     
-
+\par In recent years, Bitcoin has gained enormous popularity. After receiving many media coverages in 2017, the price went up drastically from 1,000 to 20,000 CAD, from which it has since gone down. In fact, this sudden increase in price is not surprising, since behavioral economics states that there are correlations between the public sentiment and the financial market. Fortunately, with the advent of social media, the information about public feelings has become abundant, where Twitter has received a lot of attention from researchers. \\
+	The primary contributions of this paper is to test the hypothesis that, in addition to past historical prices, the public sentiment also influences the market. The idea is that although the future movement of a stock price should be a reflection of its past tendencies, the public opinion should also be of important influence to its trajectory. In fact, high pessimism toward a stock should be followed by a downward movement and high optimism should be followed by an upward movement. 
+\par The proposed approach is structured as follows. First, a sentimental analysis is  performed on Bitcoin tweets where they are labelled as "negative" or "positive". These results are then fed to a LSTM neural network that also learns from the Bitcoin past historical prices in order to predict its future prices. Also fed into the LSTM is the volume of Bitcoin tweets. This is to reflect the growing trend and interest on Bitcoin and of its correlation to the price.
+\par	 The data consists of 2,564,353 tweets related to Bitcoin ranging from October 31, 2017 till November 27, 2017.    The Bitcoin price data consists of the hourly prices matching with the corresponding time frame.
+	 
+ % ------------------------
+\section{Related Work}
+\par Prediction of stock markets have been proven to be complex and challenging since they are by nature very stochastics. On the one hand, the Efficient-Market hypothesis states that the current price of an asset should be a reflection of all its previous information. On the other hand, the Random-Walk hypothesis claims that the price is independent of its history. Nonetheless, many researchers agree that the prediction of stock markets can be achieved to some degree.  Recently, the long short-term memory (LSTM) neural networks has gained popularity where it has been used by Nelson et al. \cite{LSTM Stock} to predict the future movement of stock prices. Moreover, LSTM has also gained notoriety as a time series model since it can maintain contextual information as well as temporal behaviours of events. In particular, Zhuge et al. \cite{LSTM Emotional} use the LSTM as a time series model to predict the Shanghai Composite Index based on its historical prices. Furthermore, they have also incorporated an emotional market data into their model in order to reflect the influence of the public opinion on the stock market. The emotional data was obtained throught a sentiment analysis based on a Naive Bayes Classifier that was fed with posts text from Eastmoney with regard to the stocks. Similarly, Khedr et al. \cite{Behavior} have also considered predicting the stock movement through a KNN algorithm that both takes into account its historical prices, and the output of a sentiment analysis based on a Naive Baye Classifier applied to Reuter news. 
+\par Another popular source of public opinion is Twitter.
  % ------------------------
 
 
 \begin{thebibliography}{2}
-\bibitem{b1} \url{https://en.wikipedia.org/wiki/Out-of-bag_error}
-\bibitem{b2} \url{https://cran.r-project.org/web/packages/partykit/vignettes/ctree.pdf}
+\bibitem{Behavior} Khedr, A.E.; Salama, S.E.; Yaseen, N. Predicting Stock Market Behavior using Data Mining Technique and News Sentiment Analysis. \textit{Int. J. Intell. Syst. Appl.} \textbf{2017}, 7, 22-30.
+\bibitem{LSTM Stock} Nelson, D. M. Q.; Pereira, A. C. M.; de Oliveira, R. A.. Stock market’s price movement
+prediction with LSTM neural networks. \textit{International Joint Conference on Neural Networks (IJCNN)}, \textbf{2017}, 1419-1426.
+
+\bibitem{word2vec Twitter} Pagolu, V. S.; Reddy, K. N.; Ganapati Panda; Majhi, B.. Sentiment
+analysis of twitter data for predicting stock market
+movements. \textit{International
+Conference on Signal Processing, Communication,
+Power and Embedded System}, \textbf{2016}, 1345-1350.
+
+\bibitem{LSTM Emotional} Zhuge, Q.; Xu, L.Y.; Zhang, G.W..  LSTM Neural Network with Emotional
+Analysis for Prediction of Stock Price. \textit{Engineering Letters}, \textbf{2017}, 25, 167-175.
 \end{thebibliography}
+
 
 \end{document}
