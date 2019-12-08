@@ -59,11 +59,10 @@ tweetsData = tweetsData.iloc[0:43500,]
 tweets = tweetsData['SentimentText']
 labels = tweetsData['Sentiment']
 
-df_BitcoinTweets =  pd.read_csv('datasets/Bitcoins/BitcoinTweets.csv')
+df_BitcoinTweets = pd.read_csv('datasets/Bitcoins/BitcoinTweetData_Formatted_Date.csv', encoding='ISO-8859-1')
 # Ordering by dates #
-df_BitcoinTweets = df_BitcoinTweets.sort_values(by='timestamp')
 
-BitcoinTweets = df_BitcoinTweets['text']
+BitcoinTweets = df_BitcoinTweets['Tweet']
 
 # Prevenging overflow #
 BitcoinTweets1 = BitcoinTweets.iloc[0:30000,]
@@ -71,17 +70,29 @@ BitcoinTweets2 = BitcoinTweets.iloc[30001: 60000,]
 # ----------------------------------------------------------- #
 # ----------------------------------------------------------- #
 # ----------------------------------------------------------- #
+
+import re
+thestring = "text1\ntext2\nhttp://url.com/bla1/blah1/\ntext3\ntext4\nhttp://url.com/bla2/blah2/\ntext5\ntext6"
+
+URLless_string = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', Tweet_Corpus[1])
+
+
+
 # --- PREPROCESSING --- #
 #Lower and split the dialog
 #and use regular expression to keep only letters we will use nltk Regular expression package
-tkr = RegexpTokenizer('[a-zA-Z@]+')
+tkr = RegexpTokenizer('[a-zA-Z]+')
 maxlentweet = 15
 
 def Pre_Processer(Tweet_Corpus, maxlentweet):
      tweets_split = []
 
      for i, line in enumerate(Tweet_Corpus):
-         tweet = str(line).lower().split()
+         # Removing the URL's
+         tweet = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', line)
+         # Splitting the words and lower all words
+         tweet = str(tweet).lower().split()
+         # Taking only the Alphabetical #
          tweet = tkr.tokenize(str(tweet))
          tweets_split.append(tweet)
 
@@ -95,6 +106,9 @@ def Pre_Processer(Tweet_Corpus, maxlentweet):
 
      return Tokenized_Tweet
 
+
+# asdf = str(Tweet_Corpus[1]).lower().split()
+# qwer = tkr.tokenize(str(asdf))
 # ---------------------- #
 # Preprocess Corpus #
 Corpus_Embed = Pre_Processer(tweets, maxlentweet)
@@ -291,3 +305,10 @@ history = regressor.fit(X_train,y_train,epochs=300,validation_data=(X_test,y_tes
 Xt = regressor.predict(X_test)
 plt.plot(sc.inverse_transform(y_test.reshape(-1,1)))
 plt.plot(sc.inverse_transform(Xt))
+
+
+
+# ----------------------------------------------------------------------------------------------------------- #
+# ------------------------------------- Extracting the tweeter data for litecoin ---------------------------- #
+# ----------------------------------------------------------------------------------------------------------- #
+
