@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  8 DEC 2019 16:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  8 DEC 2019 17:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -555,6 +555,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 89--97
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
+[2 <./Graphs/BitcoinPriceChart.pdf> <./Graphs/BitcoinVolumeChart.pdf>]
 
 ** Conference Paper **
 Before submitting the final camera ready copy, remember to:
@@ -567,10 +568,11 @@ Before submitting the final camera ready copy, remember to:
  process uses the appropriate paper size.
 
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 126.
-[2 <./Graphs/BitcoinPriceChart.pdf> <./Graphs/BitcoinVolumeChart.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 126.
+[3
 
-(./Final_Report_MORIGUCHI_NG.aux)
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 126.
+ (./Final_Report_MORIGUCHI_NG.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 126.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 126.
 Package rerunfilecheck Info: File `Final_Report_MORIGUCHI_NG.out' has not chang
@@ -579,21 +581,21 @@ ed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 126.
  ) 
 Here is how much of TeX's memory you used:
- 8907 strings out of 492995
- 138681 string characters out of 6132704
+ 8909 strings out of 492995
+ 138698 string characters out of 6132704
  236186 words of memory out of 5000000
  12319 multiletter control sequences out of 15000+600000
  40538 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,8n,77p,1117b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,8n,77p,1117b,447s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/201
 7/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Final_Report_MORIGUCHI_NG.pdf (2 pages, 71732 bytes).
+Output written on Final_Report_MORIGUCHI_NG.pdf (3 pages, 72205 bytes).
 PDF statistics:
- 91 PDF objects out of 1000 (max. 8388607)
- 79 compressed objects within 1 object stream
- 19 named destinations out of 1000 (max. 500000)
+ 97 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
+ 21 named destinations out of 1000 (max. 500000)
  59 words of extra memory for PDF output out of 10000 (max. 10000000)
 
