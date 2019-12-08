@@ -100,7 +100,7 @@ ID: 260732345}
 \begin{enumerate}
 \item \textit{Tokenization:} Tweets are split into individual words where only alphabetical characters are retained. Using regular expressions, URL's are removed as well. Therefore, each tweet is then a list of the remaining words. Moreover, since LSTM will be used as a sentiment classifier and a uniformed input is needed for the model, tweets are then trimmed down to a maximum of 15 words.
 
-\item \textit{Feature vector representation:} Word2vec is used in order to textually represent each tweet from their list of words. It allows for word embeddings where words are related according to their contexts. Thus, the use of word2vec representation makes the pre-processing of tweets more robust since the meaning of the words are then sustained across different contexts.
+\item \textit{Feature vector representation:} Word2vec is used in order to textually represent each tweet from their list of words. It allows for word embeddings where the meaning of the words are then sustained across different contexts, making the feature vector representation robust. The pre-trained word2vec embeddings from Google is used.
 \end{enumerate}
 
 \begin{thebibliography}{2}
