@@ -14,6 +14,8 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix, roc_curve,  roc_auc_score, classification_report
 
+import re
+
 # Importing the built-in logging module
 import logging
 
@@ -71,11 +73,6 @@ BitcoinTweets2 = BitcoinTweets.iloc[30001: 60000,]
 # ----------------------------------------------------------- #
 # ----------------------------------------------------------- #
 
-import re
-thestring = "text1\ntext2\nhttp://url.com/bla1/blah1/\ntext3\ntext4\nhttp://url.com/bla2/blah2/\ntext5\ntext6"
-
-URLless_string = re.sub(r'\w+:\/{2}[\d\w-]+(\.[\d\w-]+)*(?:(?:\/[^\s/]*))*', '', Tweet_Corpus[1])
-
 
 
 # --- PREPROCESSING --- #
@@ -118,7 +115,11 @@ Bitcoin_Embed = Pre_Processer(BitcoinTweets, maxlentweet)
 
 Bitcoin_Embed1 = Pre_Processer(BitcoinTweets1, maxlentweet)
 Bitcoin_Embed2 = Pre_Processer(BitcoinTweets2, maxlentweet)
+
+
+# ---------------------------- #
 # --- split dataset CORPUS --- #
+# ---------------------------- #
 X_train, X_test, Y_train, Y_test = train_test_split(Corpus_Embed, labels, test_size= 0.1, random_state = 24)
 
 
@@ -177,6 +178,9 @@ score, acc = model.evaluate(X_test, Y_test, verbose = 2, batch_size=batch_size)
 y_pred = model.predict(X_test)
 
 
+# --------------------------------------------------------------------------------- #
+# --------------------------------------- MAY BE DELETE --------------------------- #
+# --------------------------------------------------------------------------------- #
 # --- Looking for the decision boundaries to classify --- #
 from sklearn.metrics import accuracy_score
 
@@ -211,9 +215,13 @@ plt.xlim([0.0, 1.0])
 plt.ylim([0.0, 1.05])
 plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
-plt.title('Receiver Operating Characteristic of Sentiiment Analysis Model')
+plt.title('Receiver Operating Characteristic of Sentiment Analysis Model')
 plt.legend(loc="lower right")
 plt.show()
+
+# -------------------------------------------------------------------------------------- #
+# ------------------------------ MAYBE DELETE: END ------------------------------------- #
+# -------------------------------------------------------------------------------------- #
 
 # ----------------------------------------------------------------------------------------------------------------- #
 LabelBitcoinTweet1 = model.predict(Bitcoin_Embed1)
@@ -230,25 +238,9 @@ LabelBitcoinTweet2 = model.predict(Bitcoin_Embed2)
 # -------------------- Historical price --------------------- #
 # ----------------------------------------------------------- #
 
-df_BitcoinPrice = pd.read_csv('datasets/Bitcoins/BTC_USD_2013-10-01_2019-11-05-CoinDesk.csv')
+df_BitcoinPrice = pd.read_excel('datasets/Bitcoins/BitcoinPrices.xlsx')
 
-# ---------------------------------------------- #
-# Extracting just the date for future reference #
-import re
-
-BitcoinDate = []
-for Date in range(len(df_BitcoinPrice[['Date']])):
-    BitcoinDate.append(re.findall('\d{4}-\d{2}-\d{2}', str(df_BitcoinPrice[['Date']].iloc[Date,]))[0])
-# ---------------------------------------------- #
-
-# Join Only the formatted date YYYY-MM-DD #
-df_BitcoinPrice = df_BitcoinPrice.join(pd.DataFrame({'Formatted Date': BitcoinDate}))
-
-
-
-# plt.plot(df_BitcoinPrice['Formatted Date'], df_BitcoinPrice['Closing Price (USD)'], label='Bitcoin Price')
-# plt.show()
-
+# --------------------
 # ----------------------------------------------------------- #
 # ------------------- DATA PREPROCESSING -------------------- #
 # ----------------------------------------------------------- #
@@ -305,10 +297,4 @@ history = regressor.fit(X_train,y_train,epochs=300,validation_data=(X_test,y_tes
 Xt = regressor.predict(X_test)
 plt.plot(sc.inverse_transform(y_test.reshape(-1,1)))
 plt.plot(sc.inverse_transform(Xt))
-
-
-
-# ----------------------------------------------------------------------------------------------------------- #
-# ------------------------------------- Extracting the tweeter data for litecoin ---------------------------- #
-# ----------------------------------------------------------------------------------------------------------- #
 
