@@ -73,9 +73,27 @@ ID: 260732345}
 
  % ------------------------
 \section{Method}
-\par Describe the model that you implement, the data set that you use, and any other materials. There should be sufficient details that another researcher is able to more or less replicate your experiment with some effort.
+
 \subsection{Data Collection}
-\par The closing prices of Bitcoin have been extracted hourly from October 31, 2017 till November 27, 2017. Figure \ref{•} shows the price going in an upward trend from 6,123.21\$ to 9,328.25\$. It is interesting to note that the volume of tweets as shown in Figure \ref{} is increasing over that same period, suggesting a correlation between the price and the volume of tweets. A total of 2,424,480 tweets related to Bitcoin over the period  of October 31, 2017 till November 27, 2017 are extracted from Twitter API \cite{Twitter API}, using keywords like \# Bitcoin, \# BTC, \# Cryptocurrency, \# Cryptos, etc. 
+\par The closing prices of Bitcoin have been extracted hourly from October 31, 2017 till November 27, 2017 \footnote{\url{https://bitcoincharts.com}}. Figure \ref{Bitcoin Price} shows the price going in an upward trend from 6,123.21\$ to 9,328.25\$. It is interesting to note that the trend of the volume of tweets as shown in figure \ref{Bitcoin Volume Tweets} is increasing over that same period as well, suggesting a correlation between the price and the volume of tweets. A total of 2,424,480 tweets related to Bitcoin over the period  of October 31, 2017 till November 27, 2017 are extracted from Twitter API \cite{Twitter API}, using keywords like \# Bitcoin, \# BTC, \# Cryptocurrency, \# Cryptos, etc. 
+
+\begin{minipage}{\linewidth}
+\begin{figure}[H]
+\centering
+\caption{Bitcoin Price from October 31, 2017 till November 27, 2017} 
+\includegraphics[scale=0.3]{Graphs/BitcoinPriceChart.pdf}
+\label{Bitcoin Price} 
+\end{figure}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{figure}[H]
+\centering
+\caption{Bitcoin Volume Tweets from October 31, 2017 till November 27, 2017} 
+\includegraphics[scale=0.3]{Graphs/BitcoinVolumeChart.pdf}
+\label{Bitcoin Volume Tweets} 
+\end{figure}
+\end{minipage}
 
 \subsection{Pre-processing of the Tweets Data}
 \par Tweets are pre-processed in order to filter out the acronyms, the emoticons, and other unnecessary data like URL's. 
