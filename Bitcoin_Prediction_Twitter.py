@@ -257,21 +257,45 @@ Bitcoin_Training_Data_Scaled = sc.fit_transform(BitcoinPrice)
 plt.plot(Bitcoin_Training_Data_Scaled)
 plt.show()
 
+# ----------------------------------------------------------------------------------------- #
+# ------------------------------------ LSTM TIME SERIES ----------------------------------- #
+# ----------------------------------------------------------------------------------------- #
+
+BitcoinLSTMData = pd.read_csv('datasets/Bitcoins/bitcoin_price_sentiment_volume_2.csv')
+
+BitcoinPrice = BitcoinLSTMData.iloc[:, [1]].values
+
+#  scale our data for optimal performance => Normalizing the data
+from sklearn.preprocessing import MinMaxScaler
+sc = MinMaxScaler(feature_range = (0, 1))
+Bitcoin_Training_Data_Scaled = sc.fit_transform(BitcoinPrice)
+
+
+### Bitcoin Volume ###
+BitcoinVolume = BitcoinLSTMData.iloc[:, [3]].values
+Volume_Training_Data_Scaled = sc.fit_transform(BitcoinVolume)
+
+### Sentiment ###
+Sentiment = BitcoinLSTMData.iloc[:, [2]].values
+
 # ------------------------------------------------------------------------------------ #
 # ---------- Defining the processing data: how many days taken into account ---------- #
 # opening stock price of the data based on the opening stock prices for the past 60 days #
 # ------------------------------------------------------------------------------------ #
 
-def processData(data,lb):
+def processData(Price, Vol, Sent, lb):
     X,Y = [],[]
-    for i in range(len(data)-lb-1):
-        X.append(data[i:(i+lb),0])
-        Y.append(data[(i+lb),0])
+    for i in range(len(Price)-lb-1):
+        # Past Prices and Volume and Sentiment#
+        X.append(Price[i:(i+lb),0] + Vol[i:(i+lb),0] + Vol[i:(i+lb),0] + Sent[i:(i+lb),0])
+        # Current Price #
+        Y.append(Price[(i+lb),0])
+
     return np.array(X),np.array(Y)
 
-LookBack = 60
+LookBack = 24
 
-X,y = processData(Bitcoin_Training_Data_Scaled,LookBack)
+X,y = processData(Bitcoin_Training_Data_Scaled, Volume_Training_Data_Scaled, Sentiment, LookBack)
 X_train,X_test = X[:int(X.shape[0]*0.80)],X[int(X.shape[0]*0.80):]
 y_train,y_test = y[:int(y.shape[0]*0.80)],y[int(y.shape[0]*0.80):]
 
@@ -279,11 +303,21 @@ y_train,y_test = y[:int(y.shape[0]*0.80)],y[int(y.shape[0]*0.80):]
 # Build the LSTM model #
 # -------------------- #
 regressor = Sequential()
-regressor.add(LSTM(256,input_shape=(LookBack,1)))
+
+# HIDDEN LAYER 1
+regressor.add(LSTM(256, dropout=0.2, recurrent_dropout=0.2, return_sequences=True, input_shape=(LookBack,1)))
 # Drop out layers to avoid overfitting #
 regressor.add(Dropout(0.2))
+
+# HIDDENT LAYER 2
+regressor.add(LSTM(units=256, dropout=0.2, recurrent_dropout=0.2))
+
+# HIDDENT LAYER 2
 regressor.add(Dense(1))
+
 regressor.compile(optimizer='adam',loss='mse')
+
+
 
 #Reshape data for (Sample,Timestep,Features)
 X_train = X_train.reshape((X_train.shape[0],X_train.shape[1],1))

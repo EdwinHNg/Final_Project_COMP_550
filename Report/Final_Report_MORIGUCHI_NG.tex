@@ -106,12 +106,16 @@ ID: 260732345}
 \subsection{Sentiment Analysis}
 \par Because of the lack of annotated sentimental analysis of tweets data specific to the financial domain and of Bitcoin, and since the above corpus of 1,578,612 tweets used to build the word2vec model has already been annotated as being either positive or negative, the corpus of tweets is also used to train a LSTM model that will then perform a sentimental analysis on the Bitcoin tweets. 80\% of the corpus tweets are used as the training set and the remaining 20\% as the test set. The choice of word2vec model is in particular appropriate in labelling the Bitcoin tweets since the embedded word representations trained through the corpus are valid across different contexts and for the Bitcoin tweets. 
 
-\subsection{Long Short-Term Memory (LSTM)}
-\par The LSTM is a type of recurrent neural networks (RNN). Recurrent neural networks are suitable for sentiment analysis since they can establish long-term dependencies between words that are far apart and utilize contextual information. However, most recurrent neural networks has the critical problem of vanishing and exploding gradients. In order to fix this, Hochreiter and Schmidhuber \cite{LSTM} introduced the LSTM model where from the memory blocks in the hidden layer of a RNN, memory cells are introduced to allow the LSTM to keep or to forget information. This is appropriate in a sentiment analysis task since the use of LSTM may then focus more on the important words.
-
 \subsection{Prediction of the Bitcoin Prices}
 \par The sentiment analysis outputs from the LSTM classifier on the Bitcoin tweets are grouped together according to their respective tweets occurrence in the hourly time frame, and an average is then performed so that every hour from the time period of October 31, 2017 till November 27, 2017 has an average public sentimental representation. These average outputs are then fed to a time series model trained using another LSTM in order to predict the price of Bitcoin. Also fed in the model are the Bitcoin past historical prices and its tweets volume. More precisely, to predict price of the next hour, the prices from the last 24 hours, the tweets volume and their respective sentiment from the current hour are used as inputs to the LSTM model. The proposed idea is that Bitcoin prices should reflect its past trend, while also considering its popularity among the public and of the latter sentiment towards it respectively. Zhuge et al. \cite{LSTM Emotional} have shown that the use of a LSTM as a time series model is appropriate since it can maintain temporal behaviours of events by its use of contextual information. Figure \ref{Project Plan} summarizes the methodology used in this paper to predict the Bitcoin prices.
 
+\subsection{Long Short-Term Memory (LSTM)}
+\par The LSTM is a type of recurrent neural networks (RNN). Recurrent neural networks are suitable for sentiment analysis since they can establish long-term dependencies between words that are far apart and utilize contextual information. However, most recurrent neural networks has the critical problem of vanishing and exploding gradients. In order to fix this, Hochreiter and Schmidhuber \cite{LSTM} introduced the LSTM model where from the memory blocks in the hidden layer of a RNN, memory cells are introduced to allow the LSTM to keep or to forget information. This is appropriate in a sentiment analysis task since the use of LSTM may then focus more on the important words.
+
+\subsubsection{LSTM classifier for the sentiment analysis}
+d
+\subsubsection{LSTM time series model for predicting the Bitcoin Prices}
+d
 \begin{minipage}{\linewidth}
 \begin{figure}[H]
 \centering
@@ -122,6 +126,17 @@ ID: 260732345}
 \end{minipage}
 
 \section{Results}
+\par As discussed earlier, after training a word2vec model on the corpus of 1,578,612 tweets, a LSTM classifier feeding on the corpus is built to classify the sentiment of tweets. An accuracy of 0.7848 is achieved on the test set. Also shown is the associated ROC curve obtained from the different possible values of the decision boundary as it varies from 0 to 1 in order to classify the tweets as being negative or positive. Considering that the ROC curve is far over the random guesses curve, the model has good predictive power. Indeed, the random guesses curve represents what the ROC curve would look like if the model had no predictive power and would make random guesses. In fact, the idea behind the ROC curve is that the higher the area under the curve, the better prediction power the model has. The area under the curve is used to determine the predictive power of a classification model. For the model specified previously, the area under the curve corresponds to 0.87. This is considered to have good predictive power for a classification model.
+
+\begin{minipage}{\linewidth}
+\begin{figure}[H]
+\centering
+\caption{ROC curve for the LSTM classifier of tweets} 
+\includegraphics[scale=0.4]{Graphs/ROCCurveSentiment.png}
+\label{ROC Sentiment} 
+\end{figure}
+\end{minipage}
+
 
 \begin{thebibliography}{2}
 \bibitem{Behavior} Khedr, A.E.; Salama, S.E.; Yaseen, N. Predicting Stock Market Behavior using Data Mining Technique and News Sentiment Analysis. \textit{Int. J. Intell. Syst. Appl.} \textbf{2017}, 7, 22-30.
