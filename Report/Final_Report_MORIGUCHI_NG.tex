@@ -110,14 +110,14 @@ ID: 260732345}
 \par The LSTM is a type of recurrent neural networks (RNN). Recurrent neural networks are suitable for sentiment analysis since they can establish long-term dependencies between words that are far apart and utilize contextual information. However, most recurrent neural networks has the critical problem of vanishing and exploding gradients. In order to fix this, Hochreiter and Schmidhuber \cite{LSTM} introduced the LSTM model where from the memory blocks in the hidden layer of a RNN, memory cells are introduced to allow the LSTM to keep or to forget information. This is appropriate in a sentiment analysis task since the use of LSTM may then focus more on the important words.
 
 \subsection{Prediction of the Bitcoin Prices}
-\par The sentiment analysis outputs from the LSTM classifier on the Bitcoin tweets are grouped together according to their respective tweets occurrence in the hourly time frame, and an average is then performed so that every hour from the time period of October 31, 2017 till November 27, 2017 has an average public sentimental representation. These average outputs are then fed to a time series model trained using another LSTM in order to predict the price of Bitcoin. Also fed in the model are the Bitcoin past historical prices and its tweets volume. More precisely, to predict price of the next hour, the prices from the last 24 hours, the tweets volume and their respective sentiment from the current hour are used as inputs to the LSTM model. The proposed idea is that Bitcoin prices should reflect its past trend, while also considering its popularity among the public and of the latter sentiment towards it respectively. Zhuge et al. \cite{LSTM Emotional} have shown that the use of a LSTM as a time series model is appropriate since it can maintain temporal behaviours of events by its use of contextual information. Figure \ref{} summarizes the methodology used in this paper to predict the Bitcoin prices.
+\par The sentiment analysis outputs from the LSTM classifier on the Bitcoin tweets are grouped together according to their respective tweets occurrence in the hourly time frame, and an average is then performed so that every hour from the time period of October 31, 2017 till November 27, 2017 has an average public sentimental representation. These average outputs are then fed to a time series model trained using another LSTM in order to predict the price of Bitcoin. Also fed in the model are the Bitcoin past historical prices and its tweets volume. More precisely, to predict price of the next hour, the prices from the last 24 hours, the tweets volume and their respective sentiment from the current hour are used as inputs to the LSTM model. The proposed idea is that Bitcoin prices should reflect its past trend, while also considering its popularity among the public and of the latter sentiment towards it respectively. Zhuge et al. \cite{LSTM Emotional} have shown that the use of a LSTM as a time series model is appropriate since it can maintain temporal behaviours of events by its use of contextual information. Figure \ref{Project Plan} summarizes the methodology used in this paper to predict the Bitcoin prices.
 
 \begin{minipage}{\linewidth}
 \begin{figure}[H]
 \centering
-\caption{Bitcoin Volume Tweets from October 31, 2017 till November 27, 2017} 
-\includegraphics[scale=0.3]{Graphs/PlanProject.pdf}
-\label{Bitcoin Volume Tweets} 
+\caption{The Proposed Model for Bitcoin Price Prediction} 
+\includegraphics[scale=0.28]{Graphs/PlanProject.pdf}
+\label{Project Plan} 
 \end{figure}
 \end{minipage}
 
