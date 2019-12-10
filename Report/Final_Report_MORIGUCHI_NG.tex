@@ -75,7 +75,7 @@ ID: 260732345}
 \section{Method}
 
 \subsection{Data Collection}
-\par The closing prices of Bitcoin have been extracted hourly from October 31, 2017 till November 27, 2017 \footnote{\url{https://bitcoincharts.com}}. Figure \ref{Bitcoin Price} shows the price going in an upward trend from 6,123.21\$ to 9,328.25\$. It is interesting to note that the trend of the volume of tweets, shown in figure \ref{Bitcoin Volume Tweets}, is increasing over that same period as well, suggesting a correlation between the price and the volume of tweets. A total of 2,424,480 tweets related to Bitcoin over the period  of October 31, 2017 till November 27, 2017 are extracted from Twitter API \cite{Twitter API}, using keywords like \# Bitcoin, \# BTC, \# Cryptocurrency, \# Cryptos, etc. 
+\par The closing prices of Bitcoin have been extracted hourly from October 31, 2017 till November 27, 2017 \footnote{\url{https://bitcoincharts.com}}. Figure \ref{Bitcoin Price} shows the price going in an upward trend from 6,123.21\$ to 9,328.25\$. It is interesting to note that the trend of the volume of tweets, shown in figure \ref{Bitcoin Volume Tweets}, is increasing over that same period as well, suggesting a correlation between the price and the volume of tweets. The volume of tweets is extracted from the following data. A total of 2,424,480 tweets related to Bitcoin over the period  of October 31, 2017 till November 27, 2017 are extracted from Twitter API \cite{Twitter API}, using keywords like \# Bitcoin, \# BTC, \# Cryptocurrency, \# Cryptos, etc. 
 
 \begin{minipage}{\linewidth}
 \begin{figure}[H]
@@ -96,15 +96,37 @@ ID: 260732345}
 \end{minipage}
 
 \subsection{Pre-processing of the Tweets Data}
-\par Tweets are pre-processed in order to filter out the emoticons, and other unnecessary data like URL's. Moreover, they need to be converted into a feacture vector representation. A number of preprocessing steps are taken.
+\par Tweets are pre-processed in order to filter out unnecessary data like the URL's. Moreover, they need to be converted into a feature vector representation. A number of preprocessing steps are taken.
 \begin{enumerate}
-\item \textit{Tokenization:} Tweets are split into individual words where only alphabetical characters are retained. Using regular expressions, URL's are removed as well. Therefore, each tweet is then a list of the remaining words. Moreover, since LSTM will be used as a sentiment classifier and a uniformed input is needed for the model, tweets are then trimmed down to a maximum of 15 words.
+\item \textit{Tokenization:} URL's are removed from the tweets. Often, tweets also consists of hashtags(\#) and of @ for addressing users, and they are removed consequently. In addition, all alphabetical characters are converted to lowercases. Tweets are then split and tokenized into individual words so that each tweet is then a list of words. Moreover, since LSTM will be used as a sentiment classifier and a uniformed input is needed for the model, tweets are then trimmed down to a maximum of 15 words.
 
-\item \textit{Feature vector representation:} Word2vec is used in order to textually represent each tweet from their list of words. It allows for word embeddings where the meaning of the words are then sustained across different contexts, making the feature vector representation robust. The pre-trained word2vec embeddings from Google\footnote{https://code.google.com/archive/p/word2vec/} is used, which contains 300-dimensional vectors for 3 million words and phrases.
+\item \textit{Feature vector representation:} Word2vec is used in order to textually represent each tweet from their list of words. It allows for word embeddings where the meaning of the words are then sustained across different contexts, making the feature vector representation robust. A word2vec model is trained over a corpus of 1,578,612 tweets.
 \end{enumerate}
+
+\subsection{Sentiment Analysis}
+\par Because of the lack of annotated sentimental analysis of tweets data specific to the financial domain and of Bitcoin, and since the above corpus of 1,578,612 tweets used to build the word2vec model has already been annotated as being either positive or negative, the corpus of tweets is also used to train a LSTM model that will then perform a sentimental analysis on the Bitcoin tweets. 80\% of the corpus tweets are used as the training set and the remaining 20\% as the test set. The choice of word2vec model is in particular appropriate in labelling the Bitcoin tweets since the embedded word representations trained through the corpus are valid across different contexts and for the Bitcoin tweets. 
+
+\subsection{Long Short-Term Memory (LSTM)}
+\par The LSTM is a type of recurrent neural networks (RNN). Recurrent neural networks are suitable for sentiment analysis since they can establish long-term dependencies between words that are far apart and utilize contextual information. However, most recurrent neural networks has the critical problem of vanishing and exploding gradients. In order to fix this, Hochreiter and Schmidhuber \cite{LSTM} introduced the LSTM model where from the memory blocks in the hidden layer of a RNN, memory cells are introduced to allow the LSTM to keep or to forget information. This is appropriate in a sentiment analysis task since the use of LSTM may then focus more on the important words.
+
+\subsection{Prediction of the Bitcoin Prices}
+\par The sentiment analysis outputs from the LSTM classifier on the Bitcoin tweets are grouped together according to their respective tweets occurrence in the hourly time frame, and an average is then performed so that every hour from the time period of October 31, 2017 till November 27, 2017 has an average public sentimental representation. These average outputs are then fed to a time series model trained using another LSTM in order to predict the price of Bitcoin. Also fed in the model are the Bitcoin past historical prices and its tweets volume. More precisely, to predict price of the next hour, the prices from the last 24 hours, the tweets volume and their respective sentiment from the current hour are used as inputs to the LSTM model. The proposed idea is that Bitcoin prices should reflect its past trend, while also considering its popularity among the public and of the latter sentiment towards it respectively. Zhuge et al. \cite{LSTM Emotional} have shown that the use of a LSTM as a time series model is appropriate since it can maintain temporal behaviours of events by its use of contextual information. Figure \ref{} summarizes the methodology used in this paper to predict the Bitcoin prices.
+
+\begin{minipage}{\linewidth}
+\begin{figure}[H]
+\centering
+\caption{Bitcoin Volume Tweets from October 31, 2017 till November 27, 2017} 
+\includegraphics[scale=0.3]{Graphs/PlanProject.pdf}
+\label{Bitcoin Volume Tweets} 
+\end{figure}
+\end{minipage}
+
+\section{Results}
 
 \begin{thebibliography}{2}
 \bibitem{Behavior} Khedr, A.E.; Salama, S.E.; Yaseen, N. Predicting Stock Market Behavior using Data Mining Technique and News Sentiment Analysis. \textit{Int. J. Intell. Syst. Appl.} \textbf{2017}, 7, 22-30.
+
+\bibitem {LSTM} Sepp Hochreiter and Jurgen Schmidhuber. Long short-term memory. \textit{Neural Comput.}, \textbf{1997}, 9(8):1735-1780
 \bibitem{LSTM Stock} Nelson, D. M. Q.; Pereira, A. C. M.; de Oliveira, R. A.. Stock market’s price movement
 prediction with LSTM neural networks. \textit{International Joint Conference on Neural Networks (IJCNN)}, \textbf{2017}, 1419-1426.
 
