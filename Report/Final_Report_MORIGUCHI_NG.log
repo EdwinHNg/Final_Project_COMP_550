@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 DEC 2019 12:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 DEC 2019 20:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -624,16 +624,16 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 162.
 Here is how much of TeX's memory you used:
  8938 strings out of 492995
  139237 string characters out of 6132704
- 236364 words of memory out of 5000000
+ 237364 words of memory out of 5000000
  12336 multiletter control sequences out of 15000+600000
  40538 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,8n,77p,1280b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,8n,77p,1091b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/201
 7/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-di
 st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Final_Report_MORIGUCHI_NG.pdf (4 pages, 114839 bytes).
+Output written on Final_Report_MORIGUCHI_NG.pdf (4 pages, 114918 bytes).
 PDF statistics:
  168 PDF objects out of 1000 (max. 8388607)
  142 compressed objects within 2 object streams
