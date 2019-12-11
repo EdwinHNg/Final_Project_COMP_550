@@ -6,7 +6,5 @@
 \BOOKMARK [2][-]{subsection.3.3}{Sentiment Analysis}{section.3}% 6
 \BOOKMARK [2][-]{subsection.3.4}{Long Short-Term Memory \(LSTM\)}{section.3}% 7
 \BOOKMARK [2][-]{subsection.3.5}{LSTM ensemble}{section.3}% 8
-\BOOKMARK [3][-]{subsubsection.3.5.1}{LSTM classifier for the sentiment analysis}{subsection.3.5}% 9
-\BOOKMARK [3][-]{subsubsection.3.5.2}{LSTM time series model for predicting the Bitcoin Prices}{subsection.3.5}% 10
-\BOOKMARK [1][-]{section.4}{Results}{}% 11
-\BOOKMARK [1][-]{section*.5}{References}{}% 12
+\BOOKMARK [1][-]{section.4}{Results}{}% 9
+\BOOKMARK [1][-]{section*.5}{References}{}% 10

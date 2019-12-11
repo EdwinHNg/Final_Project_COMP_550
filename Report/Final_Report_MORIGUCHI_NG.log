@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 DEC 2019 20:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  10 DEC 2019 20:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,7 +530,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 ]
-<Graphs/BitcoinPriceChart.pdf, id=70, 614.295pt x 794.97pt>
+<Graphs/BitcoinPriceChart.pdf, id=62, 614.295pt x 794.97pt>
 File: Graphs/BitcoinPriceChart.pdf Graphic file (type pdf)
 
 <use Graphs/BitcoinPriceChart.pdf>
@@ -545,7 +545,7 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 79--87
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-<Graphs/BitcoinVolumeChart.pdf, id=71, 614.295pt x 794.97pt>
+<Graphs/BitcoinVolumeChart.pdf, id=63, 614.295pt x 794.97pt>
 File: Graphs/BitcoinVolumeChart.pdf Graphic file (type pdf)
 
 <use Graphs/BitcoinVolumeChart.pdf>
@@ -557,42 +557,34 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 88--96
  []
 
 [2 <./Graphs/BitcoinPriceChart.pdf> <./Graphs/BitcoinVolumeChart.pdf>]
-<Graphs/PlanProject.pdf, id=97, 1011.78pt x 614.295pt>
+<Graphs/PlanProject.pdf, id=88, 1011.78pt x 614.295pt>
 File: Graphs/PlanProject.pdf Graphic file (type pdf)
 
 <use Graphs/PlanProject.pdf>
-Package pdftex.def Info: Graphs/PlanProject.pdf used on input line 122.
+Package pdftex.def Info: Graphs/PlanProject.pdf used on input line 126.
 (pdftex.def)             Requested size: 283.29646pt x 172.00142pt.
 
-Overfull \hbox (31.29646pt too wide) in paragraph at lines 122--124
+Overfull \hbox (31.29646pt too wide) in paragraph at lines 126--128
  [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 117--126
- \OT1/ptm/m/it/10 2) LSTM time se-ries model for
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 117--126
-\OT1/ptm/m/it/10 pre-dict-ing the Bit-coin Prices: [][][] \OT1/ptm/m/n/10 d
- []
-
-<Graphs/ROCCurveSentiment.png, id=98, 409.53pt x 279.0425pt>
-File: Graphs/ROCCurveSentiment.png Graphic file (type png)
-
-<use Graphs/ROCCurveSentiment.png>
-Package pdftex.def Info: Graphs/ROCCurveSentiment.png used on input line 134.
-(pdftex.def)             Requested size: 163.80908pt x 111.615pt.
-
-Overfull \hbox (10.0pt too wide) in paragraph at lines 130--138
+Overfull \hbox (10.0pt too wide) in paragraph at lines 122--130
 []$[]$ 
  []
 
+<Graphs/ROCCurveSentiment.png, id=89, 409.53pt x 279.0425pt>
+File: Graphs/ROCCurveSentiment.png Graphic file (type png)
 
-Underfull \vbox (badness 7203) has occurred while \output is active []
+<use Graphs/ROCCurveSentiment.png>
+Package pdftex.def Info: Graphs/ROCCurveSentiment.png used on input line 138.
+(pdftex.def)             Requested size: 163.80908pt x 111.615pt.
 
- [3 <./Graphs/PlanProject.pdf>]
+Overfull \hbox (10.0pt too wide) in paragraph at lines 134--142
+[]$[]$ 
+ []
+
+[3 <./Graphs/PlanProject.pdf>]
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
@@ -608,35 +600,40 @@ Before submitting the final camera ready copy, remember to:
  uses only Type 1 fonts and that every step in the generation
  process uses the appropriate paper size.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 162.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 166.
 [4
 
  <./Graphs/ROCCurveSentiment.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 162.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 166.
  (./Final_Report_MORIGUCHI_NG.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 162.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 162.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 166.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 166.
 Package rerunfilecheck Info: File `Final_Report_MORIGUCHI_NG.out' has not chang
 ed.
-(rerunfilecheck)             Checksum: 0DE7741FEE23F35FF1CE0B4C8021FB1A;797.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 162.
+(rerunfilecheck)             Checksum: 2837A65E8FEA54D6CE483F34AF87B076;579.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 166.
  ) 
 Here is how much of TeX's memory you used:
- 8938 strings out of 492995
- 139237 string characters out of 6132704
- 237364 words of memory out of 5000000
- 12336 multiletter control sequences out of 15000+600000
+ 8936 strings out of 492995
+ 139192 string characters out of 6132704
+ 237403 words of memory out of 5000000
+ 12335 multiletter control sequences out of 15000+600000
  40538 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,8n,77p,1091b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,8n,77p,1179b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2017/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/201
-7/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-di
-st/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Final_Report_MORIGUCHI_NG.pdf (4 pages, 114918 bytes).
+exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/te
+xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/tex
+live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texli
+ve/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
+/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
+17/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2017/texmf-d
+ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2017/texmf-dist/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on Final_Report_MORIGUCHI_NG.pdf (4 pages, 153883 bytes).
 PDF statistics:
- 168 PDF objects out of 1000 (max. 8388607)
- 142 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 180 PDF objects out of 1000 (max. 8388607)
+ 149 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 
